@@ -6,7 +6,7 @@ const express = require('express');
 const cors = require('cors');
 
 // Global vars
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3001;
 
 // Make our server middleware
 const app = express();
@@ -49,7 +49,7 @@ function searchWeather() {
 // Weather Object constructor
 function Weather(time, forecast) {
   this.forecast = forecast;
-  this.time = new Date(time).toDateString();
+  this.time = new Date(time * 1000).toDateString();
 }
 
 // response error code
