@@ -43,7 +43,6 @@ This application is built with JavaScript, Node.js, Express, Heroku,
 
 I would like to thank the academy...
 
-
 ## Features
 #### Number and name of feature: __Repository Set-Up__
 
