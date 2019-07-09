@@ -47,8 +47,8 @@ function searchWeather() {
 }
 
 // Weather Object constructor
-function Weather(time, forcast) {
-  this.forcast = forcast;
+function Weather(time, forecast) {
+  this.forecast = forecast;
   this.time = new Date(time).toDateString();
 }
 

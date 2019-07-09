@@ -76,10 +76,10 @@ Actual time needed to complete: __0:41__
 
 #### Number and name of feature: __Errors__
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: __0:30__
 
-Start time: _____
+Start time: __12:06__
 
-Finish time: _____
+Finish time: __12:20__
 
-Actual time needed to complete: _____
+Actual time needed to complete: __0:15__
