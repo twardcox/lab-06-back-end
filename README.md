@@ -42,3 +42,15 @@ This application is built with JavaScript, Node.js, Express, Heroku,
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 
 I would like to thank the academy...
+
+<!-- ========================================================= -->
+
+Number and name of feature: Setup
+
+Estimate of time needed to complete: 45 min
+
+Start time: 09:25
+
+Finish time: 10:32
+
+Actual time needed to complete: **\_**

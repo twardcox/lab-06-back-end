@@ -20,17 +20,10 @@ function searchToLatLng(locationName) {
   const geoData = require('./data/geo.json');
   const location = new Location(locationName, geoData.results[0].formatted_address, geoData.results[0].geometry.location.lat, geoData.results[0].geometry.location.lng);
 
-  // const location = {
-  //   search_query: locationName,
-  //   formatted_query: geoData.results[0].formatted_address,
-  //   latitude: geoData.results[0].geometry.location.lat,
-  //   longitude: geoData.results[0].geometry.location.lng
-  // };
   return location;
 }
 
 // Location Object constructor
-
 function Location(locationName, query, lat, lng) {
   this.search_query = locationName;
   this.formatted_query = query;
@@ -38,11 +31,44 @@ function Location(locationName, query, lat, lng) {
   this.longitude = lng;
 }
 
+// searches DB for weather information returns a new object
+// pass in data to use for look up
+function searchWeather() {
+  // database of information
+  const weatherData = require('./data/darksky.json');
+  let time = [];
+
+  // construct object using data
+  for (let i = 0; i < 8; i++) {
+    time.push(new Weather(weatherData.daily.data[i].time, weatherData.daily.data[i].summary));
+  }
+
+  return time;
+}
+
+// Weather Object constructor
+function Weather(time, forcast) {
+  this.forcast = forcast;
+  this.time = new Date(time).toDateString();
+}
+
 // Set up route to location page
 app.get('/location', (req, res) => {
   try {
     const LocationData = searchToLatLng(req.query.data);
     res.send(LocationData);
+  } catch (e) {
+    res.status(500).send('Status 500: You loose!');
+  }
+});
+
+// Set up route to weather page
+app.get('/weather', (req, res) => {
+  try {
+    const weatherData = searchWeather(req.query.data);
+    res.send(weatherData);
+
+    // res.send(weatherData);
   } catch (e) {
     res.status(500).send('Status 500: You loose!');
   }
