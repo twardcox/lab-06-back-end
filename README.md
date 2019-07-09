@@ -43,14 +43,43 @@ This application is built with JavaScript, Node.js, Express, Heroku,
 
 I would like to thank the academy...
 
-<!-- ========================================================= -->
+## Features
+#### Number and name of feature: __Repository Set-Up__
 
-Number and name of feature: Setup
+Estimate of time needed to complete: __1hr__
 
-Estimate of time needed to complete: 45 min
+Start time: __9:00__
 
-Start time: 09:25
+Finish time: __10:16__
 
-Finish time: 10:32
+Actual time needed to complete: __1:15__
 
-Actual time needed to complete: **\_**
+#### Number and name of feature: __Locations__
+
+Estimate of time needed to complete: __1hr__
+
+Start time: __10:16__
+
+Finish time: __11:20__
+
+Actual time needed to complete: __1:04__
+
+#### Number and name of feature: __Weather__
+
+Estimate of time needed to complete: __1hr__
+
+Start time: __11:25__
+
+Finish time: __12:06__
+
+Actual time needed to complete: __0:41__
+
+#### Number and name of feature: __Errors__
+
+Estimate of time needed to complete: _____
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: _____
