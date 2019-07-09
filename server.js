@@ -52,13 +52,19 @@ function Weather(time, forcast) {
   this.time = new Date(time).toDateString();
 }
 
+// response error code
+function responseError() {
+  let error = { status: 500, responseText: 'Sorry, something went wrong.' };
+  return error;
+}
+
 // Set up route to location page
 app.get('/location', (req, res) => {
   try {
     const LocationData = searchToLatLng(req.query.data);
     res.send(LocationData);
   } catch (e) {
-    res.status(500).send('Status 500: You loose!');
+    res.send(responseError());
   }
 });
 
@@ -67,16 +73,14 @@ app.get('/weather', (req, res) => {
   try {
     const weatherData = searchWeather(req.query.data);
     res.send(weatherData);
-
-    // res.send(weatherData);
   } catch (e) {
-    res.status(500).send('Status 500: You loose!');
+    res.send(responseError());
   }
 });
 
 // Default selector and notifier
 app.use('*', (req, res) => {
-  res.status(404).send('You went to the wrong page.');
+  res.status(500).send('Sorry, something went wrong.');
 });
 
 // start the server
