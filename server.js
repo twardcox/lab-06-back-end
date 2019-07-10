@@ -4,6 +4,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const superagent = require('superagent');
 
 // Global vars
 const PORT = process.env.PORT || 3001;
@@ -15,13 +16,13 @@ app.use(cors());
 // =============================================================
 // Functions and Object constructors
 
-// searches DB for location information returns a new object
-function searchToLatLng(locationName) {
-  const geoData = require('./data/geo.json');
-  const location = new Location(locationName, geoData.results[0].formatted_address, geoData.results[0].geometry.location.lat, geoData.results[0].geometry.location.lng);
+// // searches DB for location information returns a new object
+// function searchToLatLng(locationName) {
+//   const geoData = require('./data/geo.json');
+//   const location = new Location(locationName, geoData.results[0].formatted_address, geoData.results[0].geometry.location.lat, geoData.results[0].geometry.location.lng);
 
-  return location;
-}
+//   return location;
+// }
 
 // Location Object constructor
 function Location(locationName, query, lat, lng) {
@@ -47,8 +48,10 @@ function searchWeather() {
 }
 
 // Weather Object constructor
-function Weather(time, forecast) {
-  this.forecast = forecast;
+function Weather(time, forcast) {
+  this.forcast = forcast;
+
+  // must multiply time by 1000 to get current dates.
   this.time = new Date(time * 1000).toDateString();
 }
 
@@ -58,15 +61,36 @@ function responseError() {
   return error;
 }
 
+// // Set up route to location page
+// app.get('/location', (req, res) => {
+//   searchToLatLng(req, res);
+// });
+
 // Set up route to location page
-app.get('/location', (req, res) => {
-  try {
-    const LocationData = searchToLatLng(req.query.data);
-    res.send(LocationData);
-  } catch (e) {
-    res.send(responseError());
-  }
-});
+app.get('/location', searchToLatLng);
+
+function searchToLatLng(req, res) {
+  // https://maps.gooleapis.com/maps/api/geocode/jaosn?address=${locationName}&key=${process.env.GEOCODE_API_KEY}
+  const locationName = req.query.data;
+
+  const url = `https://maps.gooleapis.com/maps/api/geocode/jaosn?address=${locationName}&key=${process.env.GEOCODE_API_KEY}`;
+
+  superagent
+    .get(url)
+    .then(result => {
+      let location = {
+        search_query: locationName,
+        formatted_query: result.body.results[0].formatted_address,
+        latitude: result.body.results[0].geometry.location.lat,
+        longitude: result.body.results[0].geometry.location.lng
+      };
+      res.send(location);
+    })
+    .catch(e => {
+      console.error(e);
+      res.send(responseError());
+    });
+}
 
 // Set up route to weather page
 app.get('/weather', (req, res) => {
